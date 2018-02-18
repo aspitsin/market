@@ -3,22 +3,12 @@ from bot_settings import token
 
 
 def get_bot_updates():
+    last_offset = 0
     url = "https://api.telegram.org/bot456429804:" + token + "/getupdates"
-    result = requests.get(url)
+    params = {"offset": last_offset + 1}
+    result = requests.get(url, params=params)
     pydict = result.json()
     return pydict['result']
-
-
-def last_text():
-    result = get_bot_updates()
-    text = result[-1]['message']['text']
-    return text
-
-
-def last_chat_id():
-    result = get_bot_updates()
-    chat = result[-1]['message']['chat']['id']
-    return chat
 
 
 def send_mess(chat, text):
@@ -44,16 +34,20 @@ def get_eth():
     return eth
 
 
-text = last_text()
-chat = last_chat_id()
-rate_btc = get_btc()
-rate_eth = get_eth()
+def main():
+    while True:
+        rate_btc = get_btc()
+        rate_eth = get_eth()
+        for result in get_bot_updates():
+            text = result['message']['text']
+            chat = result['message']['chat']['id']
+            print(text, chat)
+            if text == '/btc':
+                print(send_mess(chat, rate_btc))
+            elif text == '/eth':
+                print(send_mess(chat, rate_eth))
+            else:
+                print(send_mess(chat, "Type /btc or /eth "))
 
-print(text, chat)
 
-if text == 'btc':
-    print(send_mess(chat, rate_btc))
-elif text == 'eth':
-    print(send_mess(chat, rate_eth))
-else:
-    print(send_mess(chat, text))
+print(main())
