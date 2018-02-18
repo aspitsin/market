@@ -9,10 +9,6 @@ def get_bot_updates():
     return pydict['result']
 
 
-def last_update():
-    pass
-
-
 def last_text():
     result = get_bot_updates()
     text = result[-1]['message']['text']
@@ -22,7 +18,7 @@ def last_text():
 def last_chat_id():
     result = get_bot_updates()
     chat = result[-1]['message']['chat']['id']
-    return chat_id
+    return chat
 
 
 def send_mess(chat, text):
@@ -30,18 +26,6 @@ def send_mess(chat, text):
     params = {'chat_id': chat, 'text': text}
     response = requests.post(url + '/sendMessage', data=params)
     return response
-
-
-def example():
-    chat = last_chat_id()
-    text = last_text()
-    print(text)
-    if text == 'btc':
-        print(get_btc())
-    print send_mess(chat, text)
-
-
-print(example())
 
 
 def get_btc():
@@ -58,3 +42,18 @@ def get_eth():
     pydict = result.json()
     eth = pydict['ticker']['price']
     return eth
+
+
+text = last_text()
+chat = last_chat_id()
+rate_btc = get_btc()
+rate_eth = get_eth()
+
+print(text, chat)
+
+if text == 'btc':
+    print(send_mess(chat, rate_btc))
+elif text == 'eth':
+    print(send_mess(chat, rate_eth))
+else:
+    print(send_mess(chat, text))
