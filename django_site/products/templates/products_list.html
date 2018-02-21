@@ -1,0 +1,9 @@
+<header>
+  <nav>{{product.nav}}</nav>
+</header>>
+<main>
+  {% for product in products %}
+  <h2>{{product.title}}</h2>
+  <p>{{ product.description}}</p>
+  {% endfor %}
+</main>

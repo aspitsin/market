@@ -1,3 +1,8 @@
 from django.db import models
 
-# Create your models here.
+
+# Создаем базовую модель нашего продукта
+class Product(models.Model):
+      # и указываем максимальную длину
+  title = models.CharField(max_length=200)
+  description = models.TextField(max_length=5000)
