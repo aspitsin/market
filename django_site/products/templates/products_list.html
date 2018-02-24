@@ -1,14 +1,41 @@
- {% for product in products %}
-<h2>
-  <a href="/products/{{product.id}}">{{product.title}}</a>
-</h2>
-<p>{{product.description}}</p>
-<p>
-  <a href="/category/{{product.category.id}}">
-    {{product.category.title}}</a>
-</p>
-{% endfor %}
+<!doctype html>
+<html lang="en">
 
-<p>
-  <a href='http://127.0.0.1:8000/admin'>Админка</a>
-</p>
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy"
+    crossorigin="anonymous">
+
+  <title>SS!Sneaker'sShop!</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      {% for product in products %}
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <h2>
+              <a href="/products/{{product.id}}">{{product.title}}</a>
+            </h2>
+            <p>{{product.description}}</p>
+            <p>
+              <a href="/category/{{product.category.id}}">
+                {{product.category.title}}</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <p>
+    <a href='http://127.0.0.1:8000/admin'>Админка</a>
+  </p>
+</body>

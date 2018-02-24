@@ -20,3 +20,9 @@ class ProductDetail(generic.DetailView):
 class CategoryDetail(generic.DetailView):
     template_name = 'category_detail.html'
     model = Category
+
+
+class CategoryList(generic.ListView):
+    template_name = 'category_list.html'
+    context_object_name = 'categorys'
+    model = Category
