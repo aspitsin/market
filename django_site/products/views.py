@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-
+from django.core.paginator import Paginator
 from django.views import generic
 # импортируем нашу модель
 from .models import Product
@@ -10,6 +10,8 @@ class IndexView(generic.ListView):
     template_name = 'products_list.html'  # подключаем наш Темплейт
     context_object_name = 'products'  # под каким именем передадутся данные в Темплейт
     model = Product  # название Модели
+    paginate_by = 6
+    queryset = Product.objects.all()
 
 
 class ProductDetail(generic.DetailView):
