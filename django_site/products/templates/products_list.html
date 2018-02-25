@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy"
+    crossorigin="anonymous">
+
+  <title>SS!Sneaker'sShop!</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      {% for product in products %}
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <img height="100%" width="100%">{{product.img}}</img>
+            <h2>
+              <a href="/products/{{product.id}}">{{product.title}}</a>
+            </h2>
+            <p>{{product.description}}</p>
+            <p>
+              <a href="/category/{{product.category.id}}">
+                {{product.category.title}}</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <p>
+    <a href='http://127.0.0.1:8000/admin'>Админка</a>
+  </p>
+  <div class="conatiner">
+    <div class="row justify-content-md-center">
+      {% if is_paginated %}
+      <ul class="pagination">
+        {% if page_obj.has_previous %}
+        <li>
+          <a href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+        </li>
+        {% else %}
+        <li class="disabled">
+          <span>&laquo;</span>
+        </li>
+        {% endif %} {% for i in paginator.page_range %} {% if page_obj.number == i %}
+        <li class="active">
+          <span>{{ i }}
+            <span class="sr-only">(current)</span>
+          </span>
+        </li>
+        {% else %}
+        <li>
+          <a href="?page={{ i }}">{{ i }}</a>
+        </li>
+        {% endif %} {% endfor %} {% if page_obj.has_next %}
+        <li>
+          <a href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+        </li>
+        {% else %}
+        <li class="disabled">
+          <span>&raquo;</span>
+        </li>
+        {% endif %}
+      </ul>
+      {% endif %}
+    </div>
+  </div>
+</body>
