@@ -1,0 +1,12 @@
+<h2>{{product.title}}</h2>
+<p>{{product.description}}</p>
+<p>
+  <a href="/category/{{product.category.id}}">
+    {{product.category.title}}</a>
+</p>
+<p>
+  <a href='{% url "category_list" %}'>На страницу категорий</a>
+</p>
+<p>
+  <a href='{% url "index" %}'>На главную</a>
+</p>
