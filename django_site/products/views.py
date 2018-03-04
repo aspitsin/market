@@ -55,11 +55,10 @@ class OrderFormView(generic.CreateView):
     fields = 'customer_name', 'customer_phone'
 
     def form_valid(self, form):
-        # получаем ID из ссылки и передаем в ORM для фильтрации
         product = Product.objects.get(id=self.kwargs['pk'])
-        # передаем в поле товара нашей формы отфильтрованный товар
+        user = self.request.user
+        form.instance.user = user
         form.instance.product = product
-        # super — перезагружает форму, нужен для работы
         return super().form_valid(form)
 
 
