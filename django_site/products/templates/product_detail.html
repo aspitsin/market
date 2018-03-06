@@ -4,6 +4,9 @@
   <a href="/category/{{product.category.id}}">
     {{product.category.title}}</a>
 </p>
+<button>
+  <a href="{% url 'product_order' product.id %}">Заказать</a>
+</button>
 <p>
   <a href='{% url "category_list" %}'>На страницу категорий</a>
 </p>

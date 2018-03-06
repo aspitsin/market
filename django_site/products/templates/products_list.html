@@ -14,7 +14,27 @@
 </head>
 
 <body>
+  <div>
+    {% if user.is_authenticated %}
+    <p>Привет, {{ user.username }}!</p>
+    <p>
+      <a href="{% url 'logout' %}">Выйти</a>
+    </p>
+    {% else %}
+    <p>You are not logged in.</p>
+    <a href="{% url 'login' %}">Войти</a>
+    <a href="{% url 'signup' %}">Регистрация</a>
+    {% endif %}
+
+
+  </div>
   <div class="container">
+    {% for category in categories %}
+    <p>
+      <a href="/category/{{category.id}}">
+        {{category}}</a>
+    </p>
+    {% endfor %}
     <div class="row">
       {% for product in products %}
       <div class="col-md-4">
